@@ -5,24 +5,30 @@ import './index.css';
 import App from './App.tsx';
 import Dashboard from './pages/dashboard.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from './components/theme-provider.tsx';
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<App />}
-          />
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <ThemeProvider
+        defaultTheme="dark"
+        storageKey="vite-ui-theme"
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<App />}
+            />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>
 );
